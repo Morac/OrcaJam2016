@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScaleFactor: 0.03
   MoveDistance: 3
-  Speed: 0.5
+  Speed: 4
 --- !u!114 &114000012729149722
 MonoBehaviour:
   m_ObjectHideFlags: 1
