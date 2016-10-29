@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Obstacle : MonoBehaviour {
+public class Obstacle : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-	
+	void OnTriggerEnter(Collider other)
+	{
+		var player = other.GetComponent<FancyPlayerMover>();
+		if(player)
+		{
+			player.HitObstacle(this);
+		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

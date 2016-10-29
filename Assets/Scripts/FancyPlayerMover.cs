@@ -1,0 +1,56 @@
+﻿using UnityEngine;
+
+public class FancyPlayerMover : MonoBehaviour
+{
+	public enum State
+	{
+		Descending,
+		Ascending
+	}
+
+	State CurrentState = State.Descending;
+
+	public float DescendSpeed = -2;
+	public float AscendSpeed = 2;
+
+	public float LateralSpeed = 4;
+
+	public FancyPlayerActions actions;
+	public Target caughtTarget { get; private set; }
+
+	void Awake()
+	{
+		actions = FancyPlayerActions.Create();
+	}
+
+	void Update()
+	{
+		Vector3 movement = new Vector3();
+		if (CurrentState == State.Ascending)
+			movement.y = AscendSpeed;
+		else
+			movement.y = DescendSpeed;
+
+		movement.x = actions.MoveLateral.Value * LateralSpeed;
+
+		transform.position += movement * Time.deltaTime;
+	}
+
+	public void AttachTo(Target target)
+	{
+		if (caughtTarget == null)
+			return;
+		caughtTarget = target;
+
+		Debug.Log("Caught " + target.name);
+
+		//add joint
+		CurrentState = State.Ascending;
+	}
+
+	public void HitObstacle(Obstacle obstacle)
+	{
+		Debug.Log("Hit " + obstacle.name);
+		Debug.Break();
+	}
+}
