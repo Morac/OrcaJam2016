@@ -39,13 +39,16 @@ public class FancyPlayerMover : MonoBehaviour
 
 	public void AttachTo(Target target)
 	{
-		if (caughtTarget == null)
+		if (caughtTarget != null)
 			return;
+
 		caughtTarget = target;
 
 		Debug.Log("Caught " + target.name);
 
 		//add joint
+		caughtTarget.transform.parent = transform;
+
 		CurrentState = State.Ascending;
 	}
 

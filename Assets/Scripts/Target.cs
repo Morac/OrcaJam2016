@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Target : MonoBehaviour {
+public class Target : MonoBehaviour
+{
+	public float ScaleFactor = 0.1f;
+	public float Size { get; private set; }
 
-	// Use this for initialization
-	void Start () {
-	
+	void Start()
+	{
+		Size = transform.localScale.x + Mathf.Abs(transform.position.y)* ScaleFactor;
+		transform.localScale = new Vector3(Size, Size, Size);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }
