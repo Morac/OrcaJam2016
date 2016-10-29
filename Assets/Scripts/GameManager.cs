@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,9 +24,19 @@ public class GameManager : MonoBehaviour
 		}
 		else
 		{
-			if(Player.transform.position.y > 0 && Player.caughtTarget != null)
+			if(Player.enabled && Player.transform.position.y > 0 && Player.caughtTarget != null)
 			{
-				Debug.Log("End game!!!!");
+				//end game
+				Player.enabled = false;
+
+				Player.victoryParticles.Play();
+
+				//high score??
+				var seq = DOTween.Sequence();
+				seq.AppendInterval(2);
+				seq.AppendCallback(() => UIManager.Instance.DoFade());
+				seq.AppendInterval(2);
+				seq.AppendCallback(() => UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex));
 			}
 		}
 	}
