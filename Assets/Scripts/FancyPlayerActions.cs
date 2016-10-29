@@ -31,8 +31,12 @@ public class FancyPlayerActions : PlayerActionSet
 		actions.Right.AddDefaultBinding(Key.D);
 		actions.Right.AddDefaultBinding(Key.RightArrow);
 
-		//controller bindings
-
+        //controller bindings
+        actions.StartGame.AddDefaultBinding(InputControlType.Action1);
+        actions.Left.AddDefaultBinding(InputControlType.LeftStickLeft);
+        actions.Left.AddDefaultBinding(InputControlType.RightStickLeft);
+        actions.Right.AddDefaultBinding(InputControlType.RightStickRight);
+        actions.Right.AddDefaultBinding(InputControlType.LeftStickRight);
 
 		return actions;
 	}
