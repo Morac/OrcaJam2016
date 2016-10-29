@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using DG.Tweening;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
 	public FancyPlayerMover Player;
 
-	bool GameStarted = false;
+	public bool GameStarted { get; private set; }
 
 	void Start()
 	{

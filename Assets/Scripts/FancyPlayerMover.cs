@@ -46,7 +46,8 @@ public class FancyPlayerMover : MonoBehaviour
 
 		caughtTarget = target;
 
-		Debug.Log("Caught " + target.name);
+        //disable any tweens on target
+        target.DOKill(target);
 
 		//add joint
 		caughtTarget.transform.parent = transform;

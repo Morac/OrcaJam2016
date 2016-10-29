@@ -11,15 +11,16 @@ public class Target : MonoBehaviour
 
 	void Start()
 	{
-		Size = transform.localScale.x + Mathf.Abs(transform.position.y)* ScaleFactor;
+		Size = transform.localScale.x + Mathf.Abs(transform.position.y) * ScaleFactor;
 		transform.localScale = new Vector3(Size, Size, Size);
 
 		var seq = DOTween.Sequence();
 		seq.Append(transform.DOMoveX(transform.position.x - MoveDistance, Speed).SetSpeedBased(true));
-		seq.Append(transform.DORotate(new Vector3(0, 180, 0), 1));
+		seq.Append(transform.DOScaleX(-transform.localScale.x, 1));
 		seq.Append(transform.DOMoveX(transform.position.x, Speed).SetSpeedBased(true));
-		seq.Append(transform.DORotate(new Vector3(0, 0, 0), 1));
+		seq.Append(transform.DOScaleX(transform.localScale.x, 1));
 		seq.SetLoops(-1);
+		seq.SetId(this);
 	}
 
 }
