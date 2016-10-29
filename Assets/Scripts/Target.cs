@@ -23,4 +23,10 @@ public class Target : MonoBehaviour
 		seq.SetId(this);
 	}
 
+
+	public void OnCapture()
+	{
+		transform.DOKill(this);
+		transform.localScale = new Vector3(Size, Size, Size);
+	}
 }

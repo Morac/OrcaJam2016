@@ -46,8 +46,8 @@ public class FancyPlayerMover : MonoBehaviour
 
 		caughtTarget = target;
 
-        //disable any tweens on target
-        target.DOKill(target);
+		//disable any tweens on target
+		target.OnCapture();
 
 		//add joint
 		caughtTarget.transform.parent = transform;
