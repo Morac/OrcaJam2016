@@ -6,18 +6,24 @@ public class GameManager : Singleton<GameManager>
 {
 	public FancyPlayerMover Player;
 
-	public List<GameObject> Obstacles = new List<GameObject>();
-	public float ObstacleDensity = 1;
-
-	public List<GameObject> Targets = new List<GameObject>();
-	public float TargetDensity = 5;
-
 	public float UpdateRange = 10;
-	public float PositionVariance = 2;
-	public float MaxY = 0;
 
-	Dictionary<Vector2, GameObject> SpawnedObstacles = new Dictionary<Vector2, GameObject>();
-	Dictionary<Vector2, GameObject> SpawnedTargets = new Dictionary<Vector2, GameObject>();
+	[System.Serializable]
+	public class SpawnConfig
+	{
+		public List<GameObject> Prefabs = new List<GameObject>();
+		public float Density;
+		public float PositionVariance;
+		public Dictionary<Vector2, GameObject> Instances = new Dictionary<Vector2, GameObject>();
+
+		public float StartThreshold = 0.2f;
+		public float ThresholdModifier = 0.01f;
+		public float ScaleMin = 1;
+		public float ScaleMax = 1;
+		public float MaxY = 0;
+	}
+
+	public List<SpawnConfig> SpawnedObjects = new List<SpawnConfig>();
 
 	public bool GameStarted { get; private set; }
 
@@ -44,9 +50,11 @@ public class GameManager : Singleton<GameManager>
 				EndGame();
 			}
 		}
-
-		UpdateSpawnedObjects(ObstacleDensity, Obstacles, SpawnedObstacles);
-		UpdateSpawnedObjects(TargetDensity, Targets, SpawnedTargets);
+		
+		foreach(var item in SpawnedObjects)
+		{
+			UpdateSpawnedObjects(item);
+		}
 	}
 
 	void EndGame()
@@ -63,25 +71,33 @@ public class GameManager : Singleton<GameManager>
 		seq.AppendCallback(() => UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex));
 	}
 
-	void UpdateSpawnedObjects(float density, List<GameObject> prefabs, Dictionary<Vector2, GameObject> spawnedDictionary)
+	void UpdateSpawnedObjects(SpawnConfig config)
 	{
-		var pos_x = Player.transform.position.x - Player.transform.position.x % density;
-		var pos_y = Player.transform.position.y - Player.transform.position.y % density;
+		var pos_x = Player.transform.position.x - Player.transform.position.x % config.Density;
+		var pos_y = Player.transform.position.y - Player.transform.position.y % config.Density;
 
-		for(float x = pos_x - UpdateRange; x < pos_x + UpdateRange; x += density)
+		for(float x = pos_x - UpdateRange; x < pos_x + UpdateRange; x += config.Density)
 		{
-			for(float y = pos_y - UpdateRange; y < pos_y + UpdateRange && y < MaxY; y += density)
+			for(float y = pos_y - UpdateRange; y < pos_y + UpdateRange && y < config.MaxY; y += config.Density)
 			{
 				Vector2 pos = new Vector2(x, y);
-				if(spawnedDictionary.ContainsKey(pos))
+				if(config.Instances.ContainsKey(pos))
 				{
 					continue;
 				}
 
-				var inst = Instantiate(prefabs[Random.Range(0, prefabs.Count)]);
-				inst.transform.position = pos + new Vector2(Random.Range(-PositionVariance, PositionVariance), Random.Range(-PositionVariance, PositionVariance));
-
-				spawnedDictionary[pos] = inst;
+				var threshold = config.StartThreshold + Mathf.Abs(pos_y) * config.ThresholdModifier;
+				if (Random.Range(0f, 1f) > threshold)
+				{
+					config.Instances[pos] = null;
+				}
+				else
+				{
+					var inst = Instantiate(config.Prefabs[Random.Range(0, config.Prefabs.Count)]);
+					inst.transform.position = pos + new Vector2(Random.Range(-config.PositionVariance, config.PositionVariance), Random.Range(-config.PositionVariance, config.PositionVariance));
+					inst.transform.localScale *= Random.Range(config.ScaleMin, config.ScaleMax);
+					config.Instances[pos] = inst;
+				}
 			}
 		}
 	}
