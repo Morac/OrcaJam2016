@@ -312,6 +312,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleFactor: 0.1
+  MoveDistance: 2
+  Speed: 1
 --- !u!212 &77334619
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3368,6 +3370,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleFactor: 0.1
+  MoveDistance: 2
+  Speed: 1
 --- !u!212 &983055619
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4700,6 +4704,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleFactor: 0.1
+  MoveDistance: 2
+  Speed: 1
 --- !u!212 &1519696271
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5105,6 +5111,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScaleFactor: 0.1
+  MoveDistance: 2
+  Speed: 1
 --- !u!212 &1846432763
 SpriteRenderer:
   m_ObjectHideFlags: 0
