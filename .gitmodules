@@ -1,0 +1,3 @@
+[submodule "Assets/ExternalPlugins/PerlinNode"]
+	path = Assets/ExternalPlugins/PerlinNode
+	url = ../PerlinNode.git
