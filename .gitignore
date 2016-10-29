@@ -9,11 +9,9 @@
 /Assembly-UnityScript-vs.unityproj
 /Assembly-UnityScript.unityproj
 /OrcaJam2016.userprefs
-/Build/
 *.csproj
 *.unityproj
 /OrcaJam2016-csharp.v12.suo
 *.v12.suo
-/Builds/
 /obj/
 /obj/Debug/
