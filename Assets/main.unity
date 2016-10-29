@@ -2320,8 +2320,8 @@ MonoBehaviour:
     - {fileID: 1000011620115562, guid: b3f1b934e9808ea4982dda0ed86e50aa, type: 2}
     Density: 10
     PositionVariance: 2
-    StartThreshold: 0.2
-    ThresholdModifier: 0.01
+    StartThreshold: 0.4
+    ThresholdModifier: 0.04
     ScaleMin: 1
     ScaleMax: 1
     MaxY: -0.5
@@ -2329,11 +2329,20 @@ MonoBehaviour:
     - {fileID: 1000011845147276, guid: 2de728453d06bff40b26d12301b3d607, type: 2}
     Density: 2
     PositionVariance: 4
-    StartThreshold: 0.2
-    ThresholdModifier: 0.01
+    StartThreshold: 0.1
+    ThresholdModifier: 0.005
     ScaleMin: 0.4
     ScaleMax: 1
     MaxY: -10
+  - Prefabs:
+    - {fileID: 1000013113611734, guid: 9cd1a111dcee72946adba1ccbd111c58, type: 2}
+    Density: 4
+    PositionVariance: 4
+    StartThreshold: 0.2
+    ThresholdModifier: 0.01
+    ScaleMin: 0.8
+    ScaleMax: 1.2
+    MaxY: -20
 --- !u!4 &764899165
 Transform:
   m_ObjectHideFlags: 0
@@ -2783,34 +2792,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1601346861}
---- !u!1 &1775018782
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1775018783}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1775018783
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1775018782}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -5, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 2}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
 --- !u!1 &1927613084
 GameObject:
   m_ObjectHideFlags: 0
