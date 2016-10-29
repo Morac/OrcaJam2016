@@ -26,7 +26,7 @@ public class Target : MonoBehaviour
 
 	public void OnCapture()
 	{
-		transform.DOKill(this);
+		this.DOKill(this);
 		transform.localScale = new Vector3(Size, Size, Size);
 	}
 }
