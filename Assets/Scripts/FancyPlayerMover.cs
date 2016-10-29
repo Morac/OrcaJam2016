@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using DG.Tweening;
 
 public class FancyPlayerMover : MonoBehaviour
 {
@@ -50,7 +51,17 @@ public class FancyPlayerMover : MonoBehaviour
 
 	public void HitObstacle(Obstacle obstacle)
 	{
-		Debug.Log("Hit " + obstacle.name);
-		Debug.Break();
+		enabled = false;
+
+		UIManager.Instance.DoFade();
+
+		var seq = DOTween.Sequence();
+		seq.Append(DOTween.To(() => Time.timeScale, v => Time.timeScale = v, 0, 1).SetUpdate(true));
+		seq.AppendInterval(2).SetUpdate(true);
+		seq.OnComplete(() =>
+		{
+			Time.timeScale = 1;
+			UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+		});
 	}
 }
