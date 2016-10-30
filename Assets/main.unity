@@ -2151,7 +2151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DescendSpeed: -2
-  AscendSpeed: 2
+  AscendSpeed: 3
   LateralSpeed: 2
   victoryParticles: {fileID: 414937856}
 --- !u!1 &694849362
@@ -2343,6 +2343,15 @@ MonoBehaviour:
     ScaleMin: 0.8
     ScaleMax: 1.2
     MaxY: -20
+  - Prefabs:
+    - {fileID: 1000010263938538, guid: a1329feef68ebf4469ce22c98e4e2d05, type: 2}
+    Density: 8
+    PositionVariance: 4
+    StartThreshold: 0.2
+    ThresholdModifier: 0.01
+    ScaleMin: 0.8
+    ScaleMax: 1.2
+    MaxY: -12
 --- !u!4 &764899165
 Transform:
   m_ObjectHideFlags: 0
