@@ -2330,6 +2330,7 @@ GameObject:
   - 124: {fileID: 694849364}
   - 81: {fileID: 694849363}
   - 114: {fileID: 694849368}
+  - 114: {fileID: 694849369}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2418,6 +2419,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 482420460}
   DampAmount: 0.2
+--- !u!114 &694849369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 694849362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9191284b058eef549b7108b5f04e1117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intensityMultiplier: 0.43
+  generalIntensity: 0.5
+  blackIntensity: 1
+  whiteIntensity: 1
+  midGrey: 0.2
+  dx11Grain: 0
+  softness: 0
+  monochrome: 0
+  intensities: {x: 1, y: 1, z: 1}
+  tiling: {x: 64, y: 64, z: 64}
+  monochromeTiling: 64
+  filterMode: 1
+  noiseTexture: {fileID: 2800000, guid: 7a632f967e8ad42f5bd275898151ab6a, type: 3}
+  noiseShader: {fileID: 4800000, guid: b0249d8c935344451aa4de6db76f0688, type: 3}
+  dx11NoiseShader: {fileID: 4800000, guid: 8b30686bb4322ab42ad5eb50a0210b58, type: 3}
 --- !u!1 &764899162
 GameObject:
   m_ObjectHideFlags: 0
@@ -2493,10 +2520,10 @@ MonoBehaviour:
     Density: 2
     PositionVariance: 4
     StartThreshold: 0.1
-    ThresholdModifier: 0.005
+    ThresholdModifier: 0.01
     ScaleMin: 0.4
     ScaleMax: 1
-    MaxY: -10
+    MaxY: -5
   - Prefabs:
     - {fileID: 1000013113611734, guid: 9cd1a111dcee72946adba1ccbd111c58, type: 2}
     Density: 4
