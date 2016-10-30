@@ -27,6 +27,6 @@ public class HighScoreManager : Singleton<HighScoreManager>
 	void DisplayText()
 	{
 		var score = PlayerPrefs.GetFloat(ScoreKey, 0);
-		theText.text = score.ToString("0.0") + " cm";
+		theText.text = (score * 10).ToString("0.0") + " cm";
 	}
 }
