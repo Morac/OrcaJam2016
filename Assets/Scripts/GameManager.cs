@@ -63,6 +63,11 @@ public class GameManager : Singleton<GameManager>
 
 		Player.victoryParticles.Play();
 
+		if(HighScoreManager.Instance.RegisterScore(Player.caughtTarget.Size))
+		{
+			Debug.Log("High score!");
+		}
+
 		//high score??
 		var seq = DOTween.Sequence();
 		seq.AppendInterval(2);
