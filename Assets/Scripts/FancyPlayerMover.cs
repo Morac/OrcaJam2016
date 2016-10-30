@@ -34,6 +34,9 @@ public class FancyPlayerMover : MonoBehaviour
 		else
 			movement.y = DescendSpeed;
 
+        if (transform.position.y > 0)
+            movement.y *= 2;
+
 		movement.x = actions.MoveLateral.Value * LateralSpeed;
 
 		transform.position += movement * Time.deltaTime;

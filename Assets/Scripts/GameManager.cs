@@ -81,9 +81,13 @@ public class GameManager : Singleton<GameManager>
 		var pos_x = Player.transform.position.x - Player.transform.position.x % config.Density;
 		var pos_y = Player.transform.position.y - Player.transform.position.y % config.Density;
 
-		for(float x = pos_x - UpdateRange; x < pos_x + UpdateRange; x += config.Density)
+        float range = 0;
+        while (range < UpdateRange)
+            range += config.Density;
+
+		for(float x = pos_x - range; x < pos_x + range; x += config.Density)
 		{
-			for(float y = pos_y - UpdateRange; y < pos_y + UpdateRange && y < config.MaxY; y += config.Density)
+			for(float y = pos_y - range; y < pos_y + range && y < config.MaxY; y += config.Density)
 			{
 				Vector2 pos = new Vector2(x, y);
 				if(config.Instances.ContainsKey(pos))
