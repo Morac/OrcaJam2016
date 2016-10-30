@@ -2187,7 +2187,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: -700
-  m_Sprite: {fileID: 21300000, guid: cc1a6102d3dc8294a97e234def012621, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0c560323094257b41808f7c78b44e936, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2198,8 +2198,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 478116555}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 1.734, z: 1.2}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalPosition: {x: -3.5, y: 1.734, z: 1.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1277377157}
@@ -2220,7 +2220,7 @@ MonoBehaviour:
   FishingLine: {fileID: 1927613085}
   FishingLineMountPoint: {fileID: 1277377157}
   positionDamp: 2
-  positionOffset: -3
+  positionOffset: -3.5
 --- !u!95 &478116559
 Animator:
   serializedVersion: 3
@@ -2250,6 +2250,7 @@ GameObject:
   - 65: {fileID: 482420458}
   - 54: {fileID: 482420457}
   - 114: {fileID: 482420461}
+  - 81: {fileID: 482420462}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2349,6 +2350,13 @@ MonoBehaviour:
   SlowdownAmount: 0.5
   LateralSpeed: 2
   victoryParticles: {fileID: 414937856}
+--- !u!81 &482420462
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 482420456}
+  m_Enabled: 1
 --- !u!1 &560928092
 GameObject:
   m_ObjectHideFlags: 0
@@ -2554,7 +2562,6 @@ GameObject:
   - 20: {fileID: 694849366}
   - 92: {fileID: 694849365}
   - 124: {fileID: 694849364}
-  - 81: {fileID: 694849363}
   - 114: {fileID: 694849368}
   - 114: {fileID: 694849369}
   m_Layer: 0
@@ -2564,13 +2571,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &694849363
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 694849362}
-  m_Enabled: 1
 --- !u!124 &694849364
 Behaviour:
   m_ObjectHideFlags: 0
@@ -3235,7 +3235,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1277377156}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.321, y: 4.983, z: 0}
+  m_LocalPosition: {x: 3.278, y: 2.269, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []

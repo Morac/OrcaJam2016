@@ -62,7 +62,6 @@ public class GameManager : Singleton<GameManager>
 		Player.enabled = false;
 
 		//Player.victoryParticles.Play();
-		Boat.Instance.PlayEndAnimation();
 
 		HighScoreManager.Instance.RegisterScore(Player.caughtTarget.Size, EndGameCleanup);
 	}
@@ -70,8 +69,10 @@ public class GameManager : Singleton<GameManager>
 	void EndGameCleanup()
 	{
 		//cleanup
+		Boat.Instance.PlayEndAnimation();
+
 		var seq = DOTween.Sequence();
-		seq.AppendInterval(2);
+		seq.AppendInterval(4);
 		seq.AppendCallback(() => UIManager.Instance.DoFade());
 		seq.AppendInterval(2);
 		seq.AppendCallback(() => UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex));
