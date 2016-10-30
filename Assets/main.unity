@@ -2198,7 +2198,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 478116555}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5, y: 1.734, z: 1.2}
+  m_LocalPosition: {x: -3.25, y: 2, z: 1.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -2220,7 +2220,7 @@ MonoBehaviour:
   FishingLine: {fileID: 1927613085}
   FishingLineMountPoint: {fileID: 1277377157}
   positionDamp: 2
-  positionOffset: -3.5
+  positionOffset: -3.25
 --- !u!95 &478116559
 Animator:
   serializedVersion: 3
