@@ -2518,16 +2518,16 @@ MonoBehaviour:
   - Prefabs:
     - {fileID: 1000011845147276, guid: 2de728453d06bff40b26d12301b3d607, type: 2}
     Density: 2
-    PositionVariance: 4
+    PositionVariance: 2
     StartThreshold: 0.1
     ThresholdModifier: 0.01
-    ScaleMin: 0.4
-    ScaleMax: 1
+    ScaleMin: 0.3
+    ScaleMax: 0.7
     MaxY: -5
   - Prefabs:
     - {fileID: 1000013113611734, guid: 9cd1a111dcee72946adba1ccbd111c58, type: 2}
     Density: 4
-    PositionVariance: 4
+    PositionVariance: 2
     StartThreshold: 0.2
     ThresholdModifier: 0.01
     ScaleMin: 0.8
@@ -2536,7 +2536,7 @@ MonoBehaviour:
   - Prefabs:
     - {fileID: 1000010263938538, guid: a1329feef68ebf4469ce22c98e4e2d05, type: 2}
     Density: 8
-    PositionVariance: 4
+    PositionVariance: 2
     StartThreshold: 0.2
     ThresholdModifier: 0.01
     ScaleMin: 0.8
