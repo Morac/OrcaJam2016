@@ -14,6 +14,8 @@ public class FancyPlayerMover : MonoBehaviour
 	public float DescendSpeed = -2;
 	public float AscendSpeed = 2;
 
+	public float SlowdownAmount = 0.5f;
+
 	public float LateralSpeed = 4;
 
 	public FancyPlayerActions actions;
@@ -34,7 +36,14 @@ public class FancyPlayerMover : MonoBehaviour
 		else
 			movement.y = DescendSpeed;
 
+        if (transform.position.y > 0)
+            movement.y *= 2;
+
 		movement.x = actions.MoveLateral.Value * LateralSpeed;
+
+		//slowdown for finer control
+		if (actions.StartGame.IsPressed)
+			movement *= SlowdownAmount;
 
 		transform.position += movement * Time.deltaTime;
 	}
