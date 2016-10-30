@@ -62,6 +62,7 @@ public class GameManager : Singleton<GameManager>
 		Player.enabled = false;
 
 		//Player.victoryParticles.Play();
+		Boat.Instance.PlayEndAnimation();
 
 		HighScoreManager.Instance.RegisterScore(Player.caughtTarget.Size, EndGameCleanup);
 	}

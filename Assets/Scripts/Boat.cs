@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class Boat : MonoBehaviour
+[RequireComponent(typeof(Animator))]
+public class Boat : Singleton<Boat>
 {
 	public Transform Player;
 	public Transform FishingLine;
@@ -10,6 +11,13 @@ public class Boat : MonoBehaviour
 	public float positionOffset = 4;
 
 	float posDampVelocity;
+
+	Animator anim;
+
+	void Start()
+	{
+		anim = GetComponent<Animator>();
+	}
 
 	void Update()
 	{
@@ -27,5 +35,10 @@ public class Boat : MonoBehaviour
 		FishingLine.localScale = new Vector3(FishingLine.localScale.x, scale, FishingLine.localScale.z);
 
 		FishingLine.up = (FishingLineMountPoint.position - Player.position).normalized;
+	}
+
+	public void PlayEndAnimation()
+	{
+		anim.SetTrigger("TriggerEnd");
 	}
 }
