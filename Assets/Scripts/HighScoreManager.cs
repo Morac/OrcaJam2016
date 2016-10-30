@@ -1,32 +1,47 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Text))]
 public class HighScoreManager : Singleton<HighScoreManager>
 {
-	Text theText;
+	public Text lengthText;
+	public Text nameText;
 
-	const string ScoreKey = "HighScore";
+	const string ScoreKey = "HighScore.Score";
+	const string NameKey = "HighScore.Name";
 
 	void Start()
 	{
-		theText = GetComponent<Text>();
 		DisplayText();
 	}
 
-	public bool RegisterScore(float newScore)
+	public void RegisterScore(float newScore, System.Action callback)
 	{
 		if (PlayerPrefs.GetFloat(ScoreKey, 0) > newScore)
-			return false;
-
-		PlayerPrefs.SetFloat(ScoreKey, newScore);
-		DisplayText();
-		return true;
+		{
+			callback();
+		}
+		else
+		{
+			UIManager.Instance.ShowHighScoreDialogue(FormatScore(newScore), s =>
+			{
+				PlayerPrefs.SetFloat(ScoreKey, newScore);
+				PlayerPrefs.SetString(NameKey, s);
+				DisplayText();
+				callback();
+			}
+			);
+		}
 	}
 
 	void DisplayText()
 	{
 		var score = PlayerPrefs.GetFloat(ScoreKey, 0);
-		theText.text = (score * 10).ToString("0.0") + " cm";
+		lengthText.text = FormatScore(score);
+		nameText.text = PlayerPrefs.GetString(NameKey, "");
+	}
+
+	string FormatScore(float score)
+	{
+		return (score * 10).ToString("0.0") + " cm";
 	}
 }

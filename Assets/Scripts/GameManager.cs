@@ -34,9 +34,9 @@ public class GameManager : Singleton<GameManager>
 
 	void Update()
 	{
-		if(!GameStarted)
+		if (!GameStarted)
 		{
-			if(Player.actions.StartGame.WasPressed)
+			if (Player.actions.StartGame.WasPressed)
 			{
 				GameStarted = true;
 				Player.enabled = true;
@@ -44,14 +44,14 @@ public class GameManager : Singleton<GameManager>
 		}
 		else
 		{
-			if(Player.enabled && Player.transform.position.y > 0 && Player.caughtTarget != null)
+			if (Player.enabled && Player.transform.position.y > 0 && Player.caughtTarget != null)
 			{
 				//end game
 				EndGame();
 			}
 		}
-		
-		foreach(var item in SpawnedObjects)
+
+		foreach (var item in SpawnedObjects)
 		{
 			UpdateSpawnedObjects(item);
 		}
@@ -61,14 +61,14 @@ public class GameManager : Singleton<GameManager>
 	{
 		Player.enabled = false;
 
-		Player.victoryParticles.Play();
+		//Player.victoryParticles.Play();
 
-		if(HighScoreManager.Instance.RegisterScore(Player.caughtTarget.Size))
-		{
-			Debug.Log("High score!");
-		}
+		HighScoreManager.Instance.RegisterScore(Player.caughtTarget.Size, EndGameCleanup);
+	}
 
-		//high score??
+	void EndGameCleanup()
+	{
+		//cleanup
 		var seq = DOTween.Sequence();
 		seq.AppendInterval(2);
 		seq.AppendCallback(() => UIManager.Instance.DoFade());
@@ -81,16 +81,16 @@ public class GameManager : Singleton<GameManager>
 		var pos_x = Player.transform.position.x - Player.transform.position.x % config.Density;
 		var pos_y = Player.transform.position.y - Player.transform.position.y % config.Density;
 
-        float range = 0;
-        while (range < UpdateRange)
-            range += config.Density;
+		float range = 0;
+		while (range < UpdateRange)
+			range += config.Density;
 
-		for(float x = pos_x - range; x < pos_x + range; x += config.Density)
+		for (float x = pos_x - range; x < pos_x + range; x += config.Density)
 		{
-			for(float y = pos_y - range; y < pos_y + range && y < config.MaxY; y += config.Density)
+			for (float y = pos_y - range; y < pos_y + range && y < config.MaxY; y += config.Density)
 			{
 				Vector2 pos = new Vector2(x, y);
-				if(config.Instances.ContainsKey(pos))
+				if (config.Instances.ContainsKey(pos))
 				{
 					continue;
 				}
