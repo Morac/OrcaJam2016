@@ -2150,6 +2150,7 @@ GameObject:
   - 4: {fileID: 478116557}
   - 212: {fileID: 478116556}
   - 114: {fileID: 478116558}
+  - 95: {fileID: 478116559}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Untagged
@@ -2186,7 +2187,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: -700
-  m_Sprite: {fileID: 21300000, guid: 91d82ad590bda7746bbc82a269fd9d10, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cc1a6102d3dc8294a97e234def012621, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2197,8 +2198,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 478116555}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.59, y: 0.3, z: 1.2}
-  m_LocalScale: {x: 10, y: 5, z: 1}
+  m_LocalPosition: {x: -3, y: 1.734, z: 1.2}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1277377157}
@@ -2219,7 +2220,24 @@ MonoBehaviour:
   FishingLine: {fileID: 1927613085}
   FishingLineMountPoint: {fileID: 1277377157}
   positionDamp: 2
-  positionOffset: 2
+  positionOffset: -3
+--- !u!95 &478116559
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 478116555}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2dbf4b88a209c8147bccfc436427629c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &482420456
 GameObject:
   m_ObjectHideFlags: 0
@@ -3217,7 +3235,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1277377156}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.081, y: 0.056, z: 0}
+  m_LocalPosition: {x: 7.492, y: 4.916, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
