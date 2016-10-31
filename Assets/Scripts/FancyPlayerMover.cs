@@ -71,6 +71,9 @@ public class FancyPlayerMover : MonoBehaviour
 		UIManager.Instance.DoFade();
 
 		var seq = DOTween.Sequence();
+
+		GameManager.Instance.Music.DOFade(0, 1).SetUpdate(true);
+		GameManager.Instance.Ambience.DOFade(0, 1).SetUpdate(true);
 		seq.Append(DOTween.To(() => Time.timeScale, v => Time.timeScale = v, 0, 1).SetUpdate(true));
 		seq.AppendInterval(2).SetUpdate(true);
 		seq.OnComplete(() =>

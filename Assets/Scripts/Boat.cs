@@ -40,5 +40,6 @@ public class Boat : Singleton<Boat>
 	public void PlayEndAnimation()
 	{
 		anim.SetTrigger("TriggerEnd");
+		GetComponent<AudioSource>().Play();
 	}
 }

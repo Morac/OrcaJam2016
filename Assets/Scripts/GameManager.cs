@@ -8,6 +8,11 @@ public class GameManager : Singleton<GameManager>
 
 	public float UpdateRange = 10;
 
+	public AudioSource Ambience;
+	public AudioSource Music;
+
+	bool ambience = true;
+
 	[System.Serializable]
 	public class SpawnConfig
 	{
@@ -30,6 +35,8 @@ public class GameManager : Singleton<GameManager>
 	void Start()
 	{
 		Player.enabled = false;
+		Ambience.volume = 0;
+		Ambience.DOFade(1, 1);
 	}
 
 	void Update()
@@ -44,7 +51,7 @@ public class GameManager : Singleton<GameManager>
 		}
 		else
 		{
-			if (Player.enabled && Player.transform.position.y > 0 && Player.caughtTarget != null)
+			if (Player.enabled && Player.transform.position.y > 0.5f && Player.caughtTarget != null)
 			{
 				//end game
 				EndGame();
@@ -54,6 +61,19 @@ public class GameManager : Singleton<GameManager>
 		foreach (var item in SpawnedObjects)
 		{
 			UpdateSpawnedObjects(item);
+		}
+
+		if(Player.transform.position.y < 0 && ambience)
+		{
+			Ambience.DOFade(0, 1);
+			Music.DOFade(1, 1);
+			ambience = false;
+		}
+		else if(Player.transform.position.y >= 0 && !ambience)
+		{
+			Ambience.DOFade(1, 1);
+			Music.DOFade(0, 1);
+			ambience = true;
 		}
 	}
 
@@ -73,7 +93,7 @@ public class GameManager : Singleton<GameManager>
 
 		var seq = DOTween.Sequence();
 		seq.AppendInterval(4);
-		seq.AppendCallback(() => UIManager.Instance.DoFade());
+		seq.AppendCallback(() => { UIManager.Instance.DoFade(); Ambience.DOFade(0, 1); });
 		seq.AppendInterval(2);
 		seq.AppendCallback(() => UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex));
 	}
