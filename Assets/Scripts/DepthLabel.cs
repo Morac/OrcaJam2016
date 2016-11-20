@@ -15,6 +15,9 @@ public class DepthLabel : MonoBehaviour
 
 	void Update()
 	{
-		theText.text = (-Player.position.y).ToString("0.0") + " m";
+		if (Player.position.y > 0)
+			theText.text = "";
+		else
+			theText.text = (-Player.position.y).ToString("0.0") + " m";
 	}
 }
