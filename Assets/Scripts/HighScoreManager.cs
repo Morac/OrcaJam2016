@@ -42,6 +42,6 @@ public class HighScoreManager : Singleton<HighScoreManager>
 
 	string FormatScore(float score)
 	{
-		return (score * 10).ToString("0.0") + " cm";
+		return (score).ToString("0.0") + " m";
 	}
 }

@@ -1,17 +1,27 @@
 ﻿using UnityEngine;
 using DG.Tweening;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
+	public enum GameState
+	{
+		NotStarted,
+		Started,
+		Quitting
+	}
+
+	[HideInInspector]
+	public GameState State = GameState.NotStarted;
+
 	public FancyPlayerMover Player;
 
 	public float UpdateRange = 10;
 
 	public AudioSource Ambience;
 	public AudioSource Music;
-
-	bool ambience = true;
+	public AudioSource ButtonClick;
 
 	[System.Serializable]
 	public class SpawnConfig
@@ -29,8 +39,7 @@ public class GameManager : Singleton<GameManager>
 	}
 
 	public List<SpawnConfig> SpawnedObjects = new List<SpawnConfig>();
-
-	public bool GameStarted { get; private set; }
+	bool ambience = true;
 
 	void Start()
 	{
@@ -41,21 +50,34 @@ public class GameManager : Singleton<GameManager>
 
 	void Update()
 	{
-		if (!GameStarted)
+		switch (State)
 		{
-			if (Player.actions.StartGame.WasPressed)
-			{
-				GameStarted = true;
-				Player.enabled = true;
-			}
-		}
-		else
-		{
-			if (Player.enabled && Player.transform.position.y > 0.5f && Player.caughtTarget != null)
-			{
-				//end game
-				EndGame();
-			}
+			default:
+				break;
+			case GameState.NotStarted:
+				if (Player.actions.StartGame.WasPressed)
+				{
+					State = GameState.Started;
+					Player.enabled = true;
+				}
+				else if (Player.actions.Escape.WasPressed)
+				{
+					//if escape pressed, go back to title scene
+					State = GameState.NotStarted;
+					UIManager.Instance.DoFade(1f);
+					ButtonClick.Play();
+					var seq = DOTween.Sequence();
+					seq.Append(Ambience.DOFade(0, 1f));
+					seq.AppendCallback(() => SceneManager.LoadScene(0));
+				}
+				break;
+			case GameState.Started:
+				if (Player.enabled && Player.transform.position.y > 0.5f && Player.caughtTarget != null)
+				{
+					//end game
+					EndGame();
+				}
+				break;
 		}
 
 		foreach (var item in SpawnedObjects)
@@ -63,13 +85,13 @@ public class GameManager : Singleton<GameManager>
 			UpdateSpawnedObjects(item);
 		}
 
-		if(Player.transform.position.y < 0 && ambience)
+		if (Player.transform.position.y < 0 && ambience)
 		{
 			Ambience.DOFade(0, 1);
 			Music.DOFade(1, 1);
 			ambience = false;
 		}
-		else if(Player.transform.position.y >= 0 && !ambience)
+		else if (Player.transform.position.y >= 0 && !ambience)
 		{
 			Ambience.DOFade(1, 1);
 			Music.DOFade(0, 1);
@@ -83,7 +105,7 @@ public class GameManager : Singleton<GameManager>
 
 		//Player.victoryParticles.Play();
 
-		HighScoreManager.Instance.RegisterScore(Player.caughtTarget.Size, EndGameCleanup);
+		HighScoreManager.Instance.RegisterScore(Player.caughtTarget.Depth, EndGameCleanup);
 	}
 
 	void EndGameCleanup()
@@ -95,7 +117,7 @@ public class GameManager : Singleton<GameManager>
 		seq.AppendInterval(4);
 		seq.AppendCallback(() => { UIManager.Instance.DoFade(); Ambience.DOFade(0, 1); });
 		seq.AppendInterval(2);
-		seq.AppendCallback(() => UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex));
+		seq.AppendCallback(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex));
 	}
 
 	void UpdateSpawnedObjects(SpawnConfig config)

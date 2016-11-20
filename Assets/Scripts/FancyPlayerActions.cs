@@ -8,6 +8,8 @@ public class FancyPlayerActions : PlayerActionSet
 	public PlayerAction Right;
 	public PlayerOneAxisAction MoveLateral;
 
+	public PlayerAction Escape;
+
 	//open catalogue
 	//close catalogue
 	//scroll catalogue
@@ -18,6 +20,7 @@ public class FancyPlayerActions : PlayerActionSet
 		Left = CreatePlayerAction("Left");
 		Right = CreatePlayerAction("Right");
 		MoveLateral = CreateOneAxisPlayerAction(Left, Right);
+		Escape = CreatePlayerAction("Escape");
 	}
 
 	public static FancyPlayerActions Create()
@@ -30,6 +33,7 @@ public class FancyPlayerActions : PlayerActionSet
 		actions.Left.AddDefaultBinding(Key.LeftArrow);
 		actions.Right.AddDefaultBinding(Key.D);
 		actions.Right.AddDefaultBinding(Key.RightArrow);
+		actions.Escape.AddDefaultBinding(Key.Escape);
 
         //controller bindings
         actions.StartGame.AddDefaultBinding(InputControlType.Action1);
@@ -37,6 +41,7 @@ public class FancyPlayerActions : PlayerActionSet
         actions.Left.AddDefaultBinding(InputControlType.RightStickLeft);
         actions.Right.AddDefaultBinding(InputControlType.RightStickRight);
         actions.Right.AddDefaultBinding(InputControlType.LeftStickRight);
+		actions.Escape.AddDefaultBinding(InputControlType.Start);
 
 		return actions;
 	}

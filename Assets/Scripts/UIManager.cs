@@ -16,19 +16,19 @@ public class UIManager : Singleton<UIManager>
 		HighScoreDialogue.SetActive(false);
 	}
 
-	public void DoFade()
+	public void DoFade(float duration = 2f)
 	{
-		Fadeout.DOFade(1f, 2f).SetUpdate(true);
+		Fadeout.DOFade(1f, duration).SetUpdate(true);
 	}
 
 	public void ShowHighScoreDialogue(string scoreText, System.Action<string> callback)
 	{
 		HighScoreDialogue.SetActive(true);
 		HighScoreText.text = scoreText;
-		HighScoreSubmitDialogue.onEndEdit.AddListener(s =>
+		HighScoreSubmitDialogue.onEndEdit.AddListener(playerName =>
 		{
 			HighScoreDialogue.SetActive(false);
-			callback(s);
+			callback(playerName);
 		});
 	}
 }

@@ -15,8 +15,6 @@ public class TargetHitArea : MonoBehaviour
 		if (player)
 		{
 			player.AttachTo(target);
-			transform.parent.localPosition = Vector3.zero;
-			transform.parent.RotateAround(transform.position, new Vector3(0, 0, 1), -90);
 		}
 	}
 }

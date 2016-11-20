@@ -5,6 +5,7 @@ public class Target : MonoBehaviour
 {
 	public float ScaleFactor = 0.1f;
 	public float Size { get; private set; }
+	public float Depth { get; private set; }
 
 	public float MoveDistance = 5;
 	public float Speed = 2;
@@ -13,6 +14,8 @@ public class Target : MonoBehaviour
 	{
 		Size = transform.localScale.x + Mathf.Abs(transform.position.y) * ScaleFactor;
 		transform.localScale = new Vector3(Size, Size, Size);
+
+		Depth = Mathf.Abs(transform.position.y);
 
 		var seq = DOTween.Sequence();
 		seq.Append(transform.DOMoveX(transform.position.x - MoveDistance, Speed).SetSpeedBased(true));

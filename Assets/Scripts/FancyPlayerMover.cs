@@ -60,6 +60,8 @@ public class FancyPlayerMover : MonoBehaviour
 
 		//add joint
 		caughtTarget.transform.parent = transform;
+		caughtTarget.transform.localPosition = Vector3.zero;
+		caughtTarget.transform.localRotation = Quaternion.Euler(0, 0, -90);
 
 		CurrentState = State.Ascending;
 	}
