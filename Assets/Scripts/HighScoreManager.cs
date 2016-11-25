@@ -6,8 +6,8 @@ public class HighScoreManager : Singleton<HighScoreManager>
 	public Text lengthText;
 	public Text nameText;
 
-	const string ScoreKey = "HighScore.Score";
-	const string NameKey = "HighScore.Name";
+	public const string ScoreKey = "HighScore.Score";
+	public const string NameKey = "HighScore.Name";
 
 	void Start()
 	{
