@@ -10,6 +10,8 @@ public class Target : MonoBehaviour
 	public float MoveDistance = 5;
 	public float Speed = 2;
 
+	public CollectionManager.EntryID ID;
+
 	void Start()
 	{
 		Size = transform.localScale.x + Mathf.Abs(transform.position.y) * ScaleFactor;
