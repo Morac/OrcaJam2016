@@ -53,14 +53,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CollectionEntries:
   - ID: 0
-    Name: Regular Fish
-    Description: A Fish
+    Name: Common Bonefish
+    Description: A common variety in these parts. Its cartilage breaks down in heat
+      into a surprisingly tasty sludge. Key ingredient in local stew.
     Image: {fileID: 21300000, guid: 2701dd3570a7b15449aa5b97189e620d, type: 3}
   - ID: 1
-    Name: Dire Red Fish
-    Description: A Big ol' Red Fish
-    Image: {fileID: 21300000, guid: 040e923d72a986a4f9f4414d1eae7744, type: 3}
+    Name: Inkfish
+    Description: A relation to the bonefish, but considerably less tasty. However,
+      its ink sacs are used in dyes.
+    Image: {fileID: 21300000, guid: 7f8ff51585db9584db067dac9a32cbce, type: 3}
   - ID: 2
-    Name: ???
-    Description: A Blue Fish, probably
-    Image: {fileID: 21300000, guid: 3a1ee3e43b31aba4d9ceadb1bc089717, type: 3}
+    Name: Spotted Bonefish
+    Description: A rare variety of bonefish that fetches a high price due to its unusual
+      markings. It doesn't taste that much different, though, despite what the vendors
+      tell you.
+    Image: {fileID: 21300000, guid: b35f86d0ae6f7884e86d133ae8aea008, type: 3}

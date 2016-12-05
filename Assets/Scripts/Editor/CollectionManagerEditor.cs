@@ -25,5 +25,7 @@ public class CollectionManagerEditor : Editor
 				GUI.color = c;
 			}
 		}
+
+		manager.CollectionEntries = manager.CollectionEntries.OrderBy(item => item.ID).ToList();
 	}
 }

@@ -6,9 +6,9 @@ public class CollectionManager : Singleton<CollectionManager>
 {
 	public enum EntryID
 	{
-		Fish,
-		RedFish,
-		BlueFish
+		Fish = 0,
+		BlueFish = 1,
+		RedFish = 2,
 	}
 
 	public const string BaseKey = "CollectionManager.";

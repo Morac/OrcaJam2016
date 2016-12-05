@@ -114,12 +114,13 @@ public class GameManager : Singleton<GameManager>
 		if (CollectionManager.Instance.IsHighScore(Player.caughtTarget.ID, Player.caughtTarget.Depth))
 		{
 			//new high score!
+			var seq = DOTween.Sequence();
 
 			//go to page in collection
-			UIManager.Instance.ShowCollectionUI();
-			UIManager.Instance.CollectionUI.ShowEntry(Player.caughtTarget.ID);
+			seq.AppendCallback(() => UIManager.Instance.ShowCollectionUI());
+			seq.AppendInterval(0.5f);
+			seq.AppendCallback(() => UIManager.Instance.CollectionUI.ShowEntry(Player.caughtTarget.ID));
 
-			var seq = DOTween.Sequence();
 			seq.AppendInterval(1);
 
 			seq.AppendCallback(() =>

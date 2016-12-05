@@ -14,7 +14,7 @@ public class CollectionUIController : MonoBehaviour
 	void Awake()
 	{
 		var entries = CollectionManager.Instance.CollectionEntries;
-		entries.OrderBy(item => item.ID);
+		entries = entries.OrderBy(item => item.ID).ToList();
 
 		for (int i = 0; i < entries.Count; i++)
 		{
@@ -44,5 +44,17 @@ public class CollectionUIController : MonoBehaviour
 		foreach (var item in entryInstances)
 			item.DisableNavigationButtons();
 		entryInstances[(int)id].EnableNavigationBtns();
+	}
+
+	void Update()
+	{
+		foreach(CollectionManager.EntryID id in System.Enum.GetValues(typeof(CollectionManager.EntryID)))
+		{
+			if(Input.GetKeyDown(KeyCode.Alpha1 + (int)id))
+			{
+				Debug.Log(id);
+				ShowEntry(id);
+			}
+		}
 	}
 }
