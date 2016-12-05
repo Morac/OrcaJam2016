@@ -10,10 +10,16 @@ public class ClearHighScoresButton : MonoBehaviour
 	{
 		button = GetComponent<Button>();
 		button.onClick.AddListener(OnClick);
-		if(!PlayerPrefs.HasKey(HighScoreManager.ScoreKey))
+
+		foreach (CollectionManager.EntryID id in System.Enum.GetValues(typeof(CollectionManager.EntryID)))
 		{
-			button.interactable = false;
+			if (!PlayerPrefs.HasKey(CollectionManager.FormatNameKey(id)))
+			{
+				button.interactable = false;
+				break;
+			}
 		}
+
 	}
 
 	void OnClick()

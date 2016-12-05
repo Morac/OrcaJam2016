@@ -14,6 +14,8 @@ public class CollectionUIEntry : MonoBehaviour
 	public Button NextEntryButton;
 	public Button PrevEntryButton;
 
+	public static CollectionUIEntry Current { get; private set; }
+
 	CollectionUIEntry previousEntry;
 	CollectionUIEntry nextEntry;
 
@@ -23,8 +25,8 @@ public class CollectionUIEntry : MonoBehaviour
 		EntryDescription.text = entry.Description;
 		EntryImage.sprite = entry.Image;
 
-		HighScoreName.text = string.IsNullOrEmpty(entry.HighScoreName) ? "---" : entry.HighScoreName;
-		HighScoreDepth.text = entry.HighScoreDepth > 0 ? entry.HighScoreDepth.ToString("0.0") + "m" : "---";
+		SetName(entry.HighScoreName);
+		SetDepth(entry.HighScoreDepth);
 
 		this.previousEntry = prevEntry;
 		this.nextEntry = nextEntry;
@@ -62,6 +64,16 @@ public class CollectionUIEntry : MonoBehaviour
 		}
 	}
 
+	public void SetName(string name)
+	{
+		HighScoreName.text = string.IsNullOrEmpty(name) ? "---" : name;
+	}
+
+	public void SetDepth(float depth)
+	{
+		HighScoreDepth.text = depth > 0 ? depth.ToString("0.0") + "m" : "---";
+	}
+
 	public void EnableNavigationBtns()
 	{
 		if (previousEntry != null)
@@ -73,6 +85,8 @@ public class CollectionUIEntry : MonoBehaviour
 		{
 			NextEntryButton.gameObject.SetActive(true);
 		}
+
+		Current = this;
 	}
 
 	public void DisableNavigationButtons()

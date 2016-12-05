@@ -11,7 +11,17 @@ public class CollectionManager : Singleton<CollectionManager>
 		BlueFish
 	}
 
-	const string BaseKey = "CollectionManager.";
+	public const string BaseKey = "CollectionManager.";
+
+	public static string FormatNameKey(EntryID id)
+	{
+		return BaseKey + id + ".HighScoreName";
+	}
+
+	public static string FormatDepthKey(EntryID id)
+	{
+		return BaseKey + id + ".HighScoreDepth";
+	}
 
 	[System.Serializable]
 	public class Entry
@@ -32,14 +42,14 @@ public class CollectionManager : Singleton<CollectionManager>
 
 		public void SaveToPrefs()
 		{
-			PlayerPrefs.SetString(BaseKey + ID + ".HighScoreName", HighScoreName);
-			PlayerPrefs.SetFloat(BaseKey + ID + ".HighScoreDepth", HighScoreDepth);
+			PlayerPrefs.SetString(FormatNameKey(ID), HighScoreName);
+			PlayerPrefs.SetFloat(FormatDepthKey(ID), HighScoreDepth);
 		}
 
 		public void LoadFromPrefs()
 		{
-			HighScoreName = PlayerPrefs.GetString(BaseKey + ID + ".HighScoreName", "");
-			HighScoreDepth = PlayerPrefs.GetFloat(BaseKey + ID + ".HighScoreDepth", 0f);
+			HighScoreName = PlayerPrefs.GetString(FormatNameKey(ID), "");
+			HighScoreDepth = PlayerPrefs.GetFloat(FormatDepthKey(ID), 0f);
 		}
 	}
 

@@ -24,6 +24,7 @@ public class GameManager : Singleton<GameManager>
 	public AudioSource Music;
 	public AudioSource ButtonClick;
 
+
 	[System.Serializable]
 	public class SpawnConfig
 	{
@@ -108,9 +109,11 @@ public class GameManager : Singleton<GameManager>
 	{
 		Player.enabled = false;
 
+		Boat.Instance.PlayEndAnimation();
+
 		//HighScoreManager.Instance.RegisterScore(Player.caughtTarget.Depth, EndGameCleanup);
 
-		if(CollectionManager.Instance.IsHighScore(Player.caughtTarget.ID, Player.caughtTarget.Depth))
+		if (CollectionManager.Instance.IsHighScore(Player.caughtTarget.ID, Player.caughtTarget.Depth))
 		{
 			//new high score!
 
@@ -118,11 +121,28 @@ public class GameManager : Singleton<GameManager>
 			UIManager.Instance.ShowCollectionUI();
 			UIManager.Instance.CollectionUI.ShowEntry(Player.caughtTarget.ID);
 
-			//show new high score dialogue
+			var seq = DOTween.Sequence();
+			seq.AppendInterval(1);
+
+			seq.AppendCallback(() =>
+			{
+				//show new high score dialogue
+				UIManager.Instance.HighScoreDialogue.Show(highScoreName =>
+				{
+					CollectionUIEntry.Current.SetName(highScoreName);
+					CollectionUIEntry.Current.SetDepth(Player.caughtTarget.Depth);
+					CollectionManager.Instance.RegisterScore(Player.caughtTarget.ID, highScoreName, Player.caughtTarget.Depth);
+					EndGameCleanup();
+				});
+			});
 		}
 		else
 		{
-
+			//show failure text
+			UIManager.Instance.FailureText.text = FailureStatements[Random.Range(0, FailureStatements.Count)];
+			var seq = DOTween.Sequence();
+			seq.Append(UIManager.Instance.FailureText.DOFade(1f, 1f).SetEase(Ease.InQuad));
+			seq.AppendCallback(() => EndGameCleanup());
 		}
 
 	}
@@ -130,7 +150,6 @@ public class GameManager : Singleton<GameManager>
 	void EndGameCleanup()
 	{
 		//cleanup
-		Boat.Instance.PlayEndAnimation();
 
 		var seq = DOTween.Sequence();
 		seq.AppendInterval(4);
