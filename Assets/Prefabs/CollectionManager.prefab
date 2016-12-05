@@ -53,8 +53,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CollectionEntries:
   - ID: 0
+    Name: Regular Fish
     Description: A Fish
+    Image: {fileID: 21300000, guid: 2701dd3570a7b15449aa5b97189e620d, type: 3}
   - ID: 1
-    Description: A Red Fish
+    Name: Dire Red Fish
+    Description: A Big ol' Red Fish
+    Image: {fileID: 21300000, guid: 040e923d72a986a4f9f4414d1eae7744, type: 3}
   - ID: 2
-    Description: A Blue Fish
+    Name: ???
+    Description: A Blue Fish, probably
+    Image: {fileID: 21300000, guid: 3a1ee3e43b31aba4d9ceadb1bc089717, type: 3}

@@ -16,9 +16,10 @@ public class CollectionManager : Singleton<CollectionManager>
 	public class Entry
 	{
 		public EntryID ID;
-
+		public string Name;
 		[TextArea]
 		public string Description;
+		public Sprite Image;
 
 		[System.NonSerialized]
 		public string HighScoreName;
