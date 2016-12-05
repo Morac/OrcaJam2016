@@ -23,24 +23,21 @@ public class CollectionUIEntry : MonoBehaviour
 		EntryDescription.text = entry.Description;
 		EntryImage.sprite = entry.Image;
 
-		HighScoreName.text = entry.HighScoreName;
-		HighScoreDepth.text = entry.HighScoreDepth > 0 ? entry.HighScoreDepth.ToString("0.0") + "m" : "";
+		HighScoreName.text = string.IsNullOrEmpty(entry.HighScoreName) ? "---" : entry.HighScoreName;
+		HighScoreDepth.text = entry.HighScoreDepth > 0 ? entry.HighScoreDepth.ToString("0.0") + "m" : "---";
 
 		this.previousEntry = prevEntry;
 		this.nextEntry = nextEntry;
 
-		PrevEntryButton.gameObject.SetActive(false);
-		NextEntryButton.gameObject.SetActive(false);
+		DisableNavigationButtons();
 
-		if(prevEntry != null)
+		if (prevEntry != null)
 		{
 			PrevEntryButton.onClick.AddListener(() =>
 			{
 				DOTween.KillAll(transform.parent);
-				var layoutElement = GetComponent<LayoutElement>();
-				transform.parent.DOMoveX(transform.parent.position.x - layoutElement.preferredWidth, 0.5f).SetEase(Ease.OutCirc);
-				PrevEntryButton.gameObject.SetActive(false);
-				NextEntryButton.gameObject.SetActive(false);
+				transform.parent.DOLocalMoveX(-prevEntry.transform.localPosition.x, 0.5f).SetEase(Ease.OutQuad);
+				DisableNavigationButtons();
 				prevEntry.EnableNavigationBtns();
 			});
 		}
@@ -49,15 +46,13 @@ public class CollectionUIEntry : MonoBehaviour
 			PrevEntryButton.gameObject.SetActive(false);
 		}
 
-		if(nextEntry != null)
+		if (nextEntry != null)
 		{
 			NextEntryButton.onClick.AddListener(() =>
 			{
 				DOTween.KillAll(transform.parent);
-				var layoutElement = GetComponent<LayoutElement>();
-				transform.parent.DOMoveX(transform.parent.position.x + layoutElement.preferredWidth, 0.5f).SetEase(Ease.OutCirc);
-				PrevEntryButton.gameObject.SetActive(false);
-				NextEntryButton.gameObject.SetActive(false);
+				transform.parent.DOLocalMoveX(-nextEntry.transform.localPosition.x, 0.5f).SetEase(Ease.OutQuad);
+				DisableNavigationButtons();
 				nextEntry.EnableNavigationBtns();
 			});
 		}
@@ -69,17 +64,26 @@ public class CollectionUIEntry : MonoBehaviour
 
 	public void EnableNavigationBtns()
 	{
-		if(previousEntry != null)
+		if (previousEntry != null)
 		{
-			Debug.Log(1);
 			PrevEntryButton.gameObject.SetActive(true);
 		}
 
-		if(nextEntry != null)
+		if (nextEntry != null)
 		{
-			Debug.Log(2);
-			NextEntryButton.gameObject.SetActive(false);
+			NextEntryButton.gameObject.SetActive(true);
 		}
+	}
+
+	public void DisableNavigationButtons()
+	{
+		NextEntryButton.gameObject.SetActive(false);
+		PrevEntryButton.gameObject.SetActive(false);
+	}
+
+	public void CloseCollection()
+	{
+		UIManager.Instance.HideCollectionUI();
 	}
 
 }

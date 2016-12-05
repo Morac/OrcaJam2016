@@ -8,6 +8,7 @@ public class GameManager : Singleton<GameManager>
 	public enum GameState
 	{
 		NotStarted,
+		InMenus,
 		Started,
 		Quitting
 	}
@@ -41,6 +42,9 @@ public class GameManager : Singleton<GameManager>
 	public List<SpawnConfig> SpawnedObjects = new List<SpawnConfig>();
 	bool ambience = true;
 
+	[TextArea]
+	public List<string> FailureStatements = new List<string>();
+
 	void Start()
 	{
 		Player.enabled = false;
@@ -59,6 +63,7 @@ public class GameManager : Singleton<GameManager>
 				{
 					State = GameState.Started;
 					Player.enabled = true;
+					UIManager.Instance.HideCollectionButton();
 				}
 				else if (Player.actions.Escape.WasPressed)
 				{
@@ -103,9 +108,23 @@ public class GameManager : Singleton<GameManager>
 	{
 		Player.enabled = false;
 
-		//Player.victoryParticles.Play();
+		//HighScoreManager.Instance.RegisterScore(Player.caughtTarget.Depth, EndGameCleanup);
 
-		HighScoreManager.Instance.RegisterScore(Player.caughtTarget.Depth, EndGameCleanup);
+		if(CollectionManager.Instance.IsHighScore(Player.caughtTarget.ID, Player.caughtTarget.Depth))
+		{
+			//new high score!
+
+			//go to page in collection
+			UIManager.Instance.ShowCollectionUI();
+			UIManager.Instance.CollectionUI.ShowEntry(Player.caughtTarget.ID);
+
+			//show new high score dialogue
+		}
+		else
+		{
+
+		}
+
 	}
 
 	void EndGameCleanup()
@@ -153,5 +172,13 @@ public class GameManager : Singleton<GameManager>
 				}
 			}
 		}
+	}
+
+	public void SetMenus(bool showing)
+	{
+		if (showing)
+			State = GameState.InMenus;
+		else
+			State = GameState.NotStarted;
 	}
 }

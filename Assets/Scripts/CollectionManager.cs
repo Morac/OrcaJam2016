@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class CollectionManager : Singleton<CollectionManager>
 {
@@ -54,5 +55,22 @@ public class CollectionManager : Singleton<CollectionManager>
 		base.Awake();
 	}
 
+	public bool IsHighScore(EntryID id, float depth)
+	{
+		var entry = CollectionEntries.First(item => item.ID == id);
 
+		return entry.HighScoreDepth < depth;
+	}
+
+	public void RegisterScore(EntryID id, string name, float depth)
+	{
+		var entry = CollectionEntries.First(item => item.ID == id);
+
+		if (entry.HighScoreDepth < depth)
+		{
+			entry.HighScoreDepth = depth;
+			entry.HighScoreName = name;
+			entry.SaveToPrefs();
+		}
+	}
 }
