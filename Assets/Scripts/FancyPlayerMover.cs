@@ -21,8 +21,6 @@ public class FancyPlayerMover : MonoBehaviour
 	public FancyPlayerActions actions;
 	public Target caughtTarget { get; private set; }
 
-	public ParticleSystem victoryParticles;
-
 	void Awake()
 	{
 		actions = FancyPlayerActions.Create();

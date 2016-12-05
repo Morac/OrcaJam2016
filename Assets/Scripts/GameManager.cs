@@ -111,8 +111,6 @@ public class GameManager : Singleton<GameManager>
 
 		Boat.Instance.PlayEndAnimation();
 
-		//HighScoreManager.Instance.RegisterScore(Player.caughtTarget.Depth, EndGameCleanup);
-
 		if (CollectionManager.Instance.IsHighScore(Player.caughtTarget.ID, Player.caughtTarget.Depth))
 		{
 			//new high score!
@@ -152,7 +150,7 @@ public class GameManager : Singleton<GameManager>
 		//cleanup
 
 		var seq = DOTween.Sequence();
-		seq.AppendInterval(4);
+		seq.AppendInterval(2);
 		seq.AppendCallback(() => { UIManager.Instance.DoFade(); Ambience.DOFade(0, 1); });
 		seq.AppendInterval(2);
 		seq.AppendCallback(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex));
